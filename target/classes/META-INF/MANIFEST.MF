@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+Implementation-Title: jBPM :: Sample Maven Project
+Implementation-Version: 1.0.0-SNAPSHOT
 Built-By: Vamsi.Kallam
+Implementation-Vendor-Id: com.vamsiApp
 Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/ChecklistjBPMApp
 Created-By: Maven Integration for Eclipse
 

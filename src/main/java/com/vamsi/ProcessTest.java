@@ -1,4 +1,4 @@
-package com.sample;
+package com.vamsi;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ public class ProcessTest extends JbpmJUnitBaseTestCase {
 
 	@Test
 	public void testProcess() {
-		RuntimeManager manager = createRuntimeManager("com/sample/sample.bpmn");
+		RuntimeManager manager = createRuntimeManager("com/jBPM/checklist.bpmn");
 		RuntimeEngine engine = getRuntimeEngine(null);
 		KieSession ksession = engine.getKieSession();
 		TaskService taskService = engine.getTaskService();
 		
-		ProcessInstance processInstance = ksession.startProcess("com.sample.bpmn.hello");
+		ProcessInstance processInstance = ksession.startProcess("com.jBPM.bpmn.checklist");
 
 		assertProcessInstanceActive(processInstance.getId(), ksession);
 		assertNodeTriggered(processInstance.getId(), "Task 1");

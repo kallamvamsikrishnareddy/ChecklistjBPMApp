@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:g="http://www.jboss.org/drools/flow/gpd" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.jboss.org/drools" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.jboss.org/drools" id="Definition" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <process id="com.jBPM.bpmn.checklist" name="Checklist" isExecutable="true" processType="Private" xmlns:tns="http://www.jboss.org/drools" tns:packageName="defaultPackage">
+    <startEvent id="_1"></startEvent>
+    <endEvent id="_3">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <userTask id="_4" name="Task 1" activiti:candidateGroups="john"></userTask>
+    <userTask id="_5" name="Task 2" activiti:candidateGroups="mary"></userTask>
+    <sequenceFlow id="_5-_3" sourceRef="_5" targetRef="_3"></sequenceFlow>
+    <sequenceFlow id="_1-_4" sourceRef="_1" targetRef="_4"></sequenceFlow>
+    <sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_com.jBPM.bpmn.checklist">
+    <bpmndi:BPMNPlane bpmnElement="com.jBPM.bpmn.checklist" id="BPMNPlane_com.jBPM.bpmn.checklist">
+      <bpmndi:BPMNShape bpmnElement="_1" id="BPMNShape__1">
+        <omgdc:Bounds height="36.0" width="36.0" x="27.0" y="22.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="BPMNShape__3">
+        <omgdc:Bounds height="36.0" width="36.0" x="360.0" y="22.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" id="BPMNShape__4">
+        <omgdc:Bounds height="48.0" width="100.0" x="96.0" y="16.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" id="BPMNShape__5">
+        <omgdc:Bounds height="48.0" width="100.0" x="228.0" y="16.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_5-_3" id="BPMNEdge__5-_3">
+        <omgdi:waypoint x="328.0" y="40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="360.0" y="40.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_4" id="BPMNEdge__1-_4">
+        <omgdi:waypoint x="63.0" y="40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="96.0" y="40.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_5" id="BPMNEdge__4-_5">
+        <omgdi:waypoint x="196.0" y="40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="228.0" y="40.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

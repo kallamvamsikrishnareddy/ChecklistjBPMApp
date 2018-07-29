@@ -1,7 +1,4 @@
-package com.sample;
-
-import java.util.List;
-
+package com.vamsi;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -15,21 +12,38 @@ import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.manager.RuntimeManagerFactory;
 import org.kie.api.task.TaskService;
-import org.kie.api.task.model.TaskSummary;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+/**
+ * 
+ * @author Vamsi.Kallam
+ * this is the main class to create Spring boot application
+ * this is will also create kie container
+ */
+@SpringBootApplication
+@Configuration
+@EnableAutoConfiguration
 public class ProcessMain {
-
+	
+	RuntimeEngine engine;
 	public static void main(String[] args) {
+		SpringApplication.run(ProcessMain.class, args);
+	}
+	
+	@Bean
+	public RuntimeEngine runtimeEngine(){
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks.getKieClasspathContainer();
 		KieBase kbase = kContainer.getKieBase("kbase");
 
 		RuntimeManager manager = createRuntimeManager(kbase);
-		RuntimeEngine engine = manager.getRuntimeEngine(null);
-		KieSession ksession = engine.getKieSession();
-		TaskService taskService = engine.getTaskService();
-
-		ksession.startProcess("com.sample.bpmn.hello");
+		this.engine = manager.getRuntimeEngine(null);
+		
+/*		ksession.startProcess("com.jBPM.bpmn.checklist");
 
 		// let john execute Task 1
 		List<TaskSummary> list = taskService.getTasksAssignedAsPotentialOwner("john", "en-UK");
@@ -43,12 +57,24 @@ public class ProcessMain {
 		task = list.get(0);
 		System.out.println("Mary is executing task " + task.getName());
 		taskService.start(task.getId(), "mary");
-		taskService.complete(task.getId(), "mary", null);
+		taskService.complete(task.getId(), "mary", null);*/
 
-		manager.disposeRuntimeEngine(engine);
-		System.exit(0);
+/*		manager.disposeRuntimeEngine(engine);
+		System.exit(0);*/
+		return this.engine;
 	}
-
+	
+	@Bean
+	public KieSession kieSession(){		
+		KieSession ksession = this.engine.getKieSession();
+		return ksession;		
+	}
+	
+	@Bean
+	public TaskService taskService(){
+		TaskService taskService = this.engine.getTaskService();
+		return taskService;
+	}
 	private static RuntimeManager createRuntimeManager(KieBase kbase) {
 		JBPMHelper.startH2Server();
 		JBPMHelper.setupDataSource();
@@ -57,7 +83,7 @@ public class ProcessMain {
 			.newDefaultBuilder().entityManagerFactory(emf)
 			.knowledgeBase(kbase);
 		return RuntimeManagerFactory.Factory.get()
-			.newSingletonRuntimeManager(builder.get(), "com.sample:example:1.0");
+			.newSingletonRuntimeManager(builder.get(), "com.jBPM:example:1.0");
 	}
 
 }
